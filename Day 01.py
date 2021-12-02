@@ -14,7 +14,7 @@ def buildSummedTripletArray(data, output = []):
     return output
 
 @timed
-def advent01(data, total = 0):
+def day01(data, total = 0):
     for i in range(len(data)):
         if data[i] > data[i-1]:
             total += 1
@@ -22,4 +22,6 @@ def advent01(data, total = 0):
     return total
 
 if __name__ == "__main__":
-    print(advent01(buildSummedTripletArray(importData("001.txt"))))
+    data = importData("Day 01.txt")
+    print(f"Challenge 1: {day01(data)}")
+    print(f"Challenge 2: {day01((buildSummedTripletArray(data)))}")
