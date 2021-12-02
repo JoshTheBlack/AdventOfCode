@@ -10,11 +10,11 @@ def day02A(data):
     x,y,aim = 0,0,0
     for command in data:
         if command[0].lower() == 'f':
-            x += int(command[-1])
+            x += int(command.rsplit(' ', 1)[-1])
         elif command[0].lower() == 'u': 
-            y -= int(command[-1])
+            y -= int(command.rsplit(' ', 1)[-1])
         elif command[0].lower() == 'd':
-            y += int(command[-1])
+            y += int(command.rsplit(' ', 1)[-1])
         else:
             print("Error")
     return x * y
@@ -24,12 +24,12 @@ def day02B(data):
     x,y,aim = 0,0,0
     for command in data:
         if command[0].lower() == 'f':
-            x += int(command[-1])
-            y += int(command[-1]) * aim
+            x += int(command.rsplit(' ', 1)[-1])
+            y += int(command.rsplit(' ', 1)[-1]) * aim
         elif command[0].lower() == 'u': 
-            aim -= int(command[-1])
+            aim -= int(command.rsplit(' ', 1)[-1])
         elif command[0].lower() == 'd':
-            aim += int(command[-1])
+            aim += int(command.rsplit(' ', 1)[-1])
         else:
             print("Error")
     return x * y
