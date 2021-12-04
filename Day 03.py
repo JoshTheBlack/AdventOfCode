@@ -7,25 +7,16 @@ def importData(fileName):
 
 def findMostCommonBits(data, bit):
     x = 0
-    for item in data:
-        x += int(item[bit])
-
-    if x > len(data) / 2:
-        return 1
-    elif x < len(data) / 2:
-        return 0
-    else:
-        return 2
+    for item in data: x += int(item[bit])
+    if x >= len(data) / 2: return 1
+    else: return 0
 
 @timed
-def day03A(data):
-    epsilon = ""
-    gamma = ""
+def day03A(data, epsilon = "", gamma = ""):
     for i in range(len(data[0])):
         x = findMostCommonBits(data,i)
         gamma += str(x)
         epsilon += str(int(not x))
-    
     return int(gamma,2) * int(epsilon,2)
 
 @timed
@@ -34,13 +25,11 @@ def day03B(data):
     co2 = list(data)
     for i in range(len(data[0])):
         test = findMostCommonBits(o2, i)
-        if test == 2: test = 1
         if len(o2) > 1:
             o3 = [item for item in o2 if int(item[i]) == test]
             o2 = o3
 
         test = findMostCommonBits(co2, i)
-        if test == 2: test = 1
         if len(co2) > 1:
             co3 = [item for item in co2 if int(item[i]) != test]
             co2 = co3
