@@ -1,7 +1,6 @@
 from collections import Counter
 from comm import timed
 
-
 def count(data, times):
     C = Counter(data)
     for i in range(times):
