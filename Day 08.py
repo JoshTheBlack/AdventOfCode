@@ -1,10 +1,39 @@
 import os
 import numpy as np
 from collections import Counter
+from itertools import permutations
 from comm import timed
 
 def importData(fileName):
     return np.transpose(np.loadtxt(os.path.join(os.sys.path[0], fileName), dtype=str, skiprows=0, delimiter="\n"))
+
+def match(code):
+    digs = {
+        'abcefg' : 0,
+        'cf' : 1,
+        'acdeg' : 2,
+        'acdfg' : 3,
+        'bcdf' : 4,
+        'abdfg' : 5,
+        'abdefg' : 6,
+        'acf' : 7,
+        'abcdefg' : 8,
+        'abcdfg' : 9
+    }
+    count = 0
+    key = {}
+    for p in permutations('abcdefg'):
+        for digit in code:
+            test = []
+            for line in digit:
+                test.append(p[ord(line) - ord('a')])
+            a = "".join(sorted(test))
+            b = "".join(sorted(digit))
+            if a in digs: 
+                key[b] = digs[a]
+            else: break
+        if len(key) == len(code): 
+            return key
 
 def decodeKey(data):
     key = ['','','','','','','']
@@ -146,7 +175,24 @@ def day08B(data):
         result += int(digits)
     return result
 
+@timed
+def day08B2(data):
+    answer = 0
+    for line in data:
+        code, decode = line.split(' | ')
+        code = code.split()
+        decode = decode.split()
+        key = match(code)
+        digs = []
+        for digit in decode:
+            digs.append(str(key["".join(sorted(digit))]))
+        dc = int("".join(digs))
+        answer += dc
+
+    return answer
+
 if __name__ == "__main__":
     data = importData('Day 08.txt')
     print(f"Day 08 A: {day08A(data)}")
     print(f"Day 08 B: {day08B(data)}")
+    print(f"Day 08 B Alternate: {day08B2(data)}")
