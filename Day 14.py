@@ -13,30 +13,35 @@ def fix(data):
         key[j] = k 
     return key
 
+def step(C):
+    C2 = Counter()
+    for k, v in C.items():
+        if k in rules:
+            C2[k[0] + rules[k]] += v
+            C2[rules[k] + k[1]] += v
+        else:
+            C2[k] += v
+    return C2
+
+def count(C):
+    C2 = Counter()
+    for k, v in C.items():
+        C2[k[0]] += v
+    return sorted(C2.values())
+
 @timed
-def day14(protein, rules, times):
+def day14(protein, times):
     C = Counter()
     for i in range(len(protein) - 1):
         C[protein[i:i+2]] += 1
     C[protein[-1]] += 1
-
     for _ in range(times):
-        C2 = Counter()
-        for k, v in C.items():
-            if k in rules:
-                C2[k[0] + rules[k]] += v
-                C2[rules[k] + k[1]] += v
-            else:
-                C2[k] += v
-        C = C2
-    C = Counter()
-    for k, v in C2.items():
-        C[k[0]] += v
-    lst = sorted(C.values())
+        C = step(C)
+    lst = count(C)
     return lst[-1] - lst[0]
 
 if __name__ == "__main__":
     data = "PFVKOBSHPSPOOOCOOHBP"
-    key = fix(importData("Day 14.txt"))
-    print(f"Day 14 A: {day14(data, key, 10)}") # 2937
-    print(f"Day 14 B: {day14(data, key, 40)}") # 3390034818249
+    rules = fix(importData("Day 14.txt"))
+    print(f"Day 14 A: {day14(data, 10)}") # 2937
+    print(f"Day 14 B: {day14(data, 40)}") # 3390034818249
