@@ -42,7 +42,7 @@ def day17B(data):
                 vy -= 1
                 vx = max(0,vx-1)
 
-    # total = search(xmin, xmax, ymin, ymax, v0xmin)
+    total = search(xmin, xmax, ymin, ymax, v0xmin)
 
     return total
 
