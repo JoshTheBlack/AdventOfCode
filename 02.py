@@ -1,4 +1,3 @@
-import os
 from comm import timed
 
 def importData(fileName):
