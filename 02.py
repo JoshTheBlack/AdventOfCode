@@ -9,6 +9,8 @@ def importData(fileName):
 
 @timed
 def runA(data):
+    '''Calculate total round score from RPS games if A/X = Rock, B/Y = Paper, C/Z = Scissors
+    Rock scores 1, Paper scores 2, Scissors scores 3; lose scores 0, draw scores 3, win scores 6'''
     key = {"A X": 3, "A Y": 6, "A Z": 0, "B X": 0, "B Y": 3, "B Z": 6, "C X": 6, "C Y": 0, "C Z": 3} # round scoring key
     score = 0
     for round in data:
@@ -18,6 +20,8 @@ def runA(data):
 
 @timed
 def runB(data):
+    '''Calculates total round score from RPS if X = Loss = 0, Y = Draw = 3, Z = Win = 6
+    Determine sign needed to get desired result and add its value (1/2/3 = Rock/Paper/Scissors) to the score'''
     key = {"A X": 3, "A Y": 1, "A Z": 2, "B X": 1, "B Y": 2, "B Z": 3, "C X": 2, "C Y": 3, "C Z": 1} # sign decision matrix
     score = 0
     for round in data:
