@@ -1,9 +1,7 @@
 import os
-#import numpy as np
 from comm import timed
 
 def importData(fileName):
-    #return np.loadtxt(os.path.join(os.sys.path[0], fileName), dtype=int, skiprows=0)
     with open(fileName) as file:
         lines = file.read()
         groups = lines.split("\n")
@@ -34,7 +32,3 @@ if __name__ == "__main__":
     print(f"A: {runA(data)}") # 
     data = importData("02.in")
     print(f"B: {runB(data)}") # 
-
-    '''A = Rock = 1
-    B = Paper = 2
-    C = Scissors = 3'''
