@@ -8,6 +8,7 @@ def importData(fileName):
     return [x for x in groups]
 
 def fixdata(data):
+    '''Convert data into (list of) lists of ranges'''
     out = []
     for line in data:
         x = line.split(',')
@@ -17,6 +18,7 @@ def fixdata(data):
 
 @timed
 def runA(data):
+    '''Count the number of pairs of ranges with one range fully encompassed by the other'''
     count = 0
     for a in data:
         if a[0].start <= a[1].start and a[0].stop >= a[1].stop or a[1].start <= a[0].start and a[1].stop >= a[0].stop:
@@ -25,6 +27,7 @@ def runA(data):
 
 @timed
 def runB(data):
+    '''Count the number of pairs of ranges with any amount of overlap'''
     count = 0
     for line in data:
         if line[0].start <= line[1].stop and line[1].start <= line[0].stop:
@@ -33,6 +36,6 @@ def runB(data):
 
 if __name__ == "__main__":
     data = fixdata(importData("04.in"))
-    print(f"A: {runA(data)}") # 1.44 ms
+    print(f"A: {runA(data)}") # 1 ms
     data = fixdata(importData("04.in"))
-    print(f"B: {runB(data)}") # .85 ms
+    print(f"B: {runB(data)}") # 1 ms
