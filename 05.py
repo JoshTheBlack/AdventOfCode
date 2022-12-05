@@ -20,6 +20,9 @@ def fixdata(data):
     i = [[0], s1, s2, s3, s4, s5, s6, s7, s8, s9]
     return data, i
 
+def report(data):
+    return f'{data[1][-1]}{data[2][-1]}{data[3][-1]}{data[4][-1]}{data[5][-1]}{data[6][-1]}{data[7][-1]}{data[8][-1]}{data[9][-1]}'
+
 @timed
 def runA(directions, data):
     '''Rearrange items from the end of lists one at a time according to directions'''
@@ -28,7 +31,7 @@ def runA(directions, data):
         for _ in range(int(x[1])):
             y = data[int(x[3])].pop() # remove item from source
             data[int(x[5])].append(y) # place item on destination
-    return f'{data[1][-1]}{data[2][-1]}{data[3][-1]}{data[4][-1]}{data[5][-1]}{data[6][-1]}{data[7][-1]}{data[8][-1]}{data[9][-1]}'
+    return report(data)
 
 @timed
 def runB(directions, data):
@@ -37,7 +40,7 @@ def runB(directions, data):
         x = row.split(' ') # split direction into array
         data[int(x[5])].extend(data[int(x[3])][-int(x[1]):]) # copy items from source and extend onto destination
         data[int(x[3])] = data[int(x[3])][:-int(x[1])] # remove items from source
-    return f'{data[1][-1]}{data[2][-1]}{data[3][-1]}{data[4][-1]}{data[5][-1]}{data[6][-1]}{data[7][-1]}{data[8][-1]}{data[9][-1]}'
+    return report(data)
 
 
 if __name__ == "__main__":
