@@ -22,27 +22,26 @@ def fixdata(data):
 
 @timed
 def runA(directions, data):
+    '''Rearrange items from the end of lists one at a time according to directions'''
     for row in directions:
-        x = row.split(' ')
+        x = row.split(' ') # split direction into array
         for _ in range(int(x[1])):
-            y = data[int(x[3])].pop()
-            data[int(x[5])].append(y)
+            y = data[int(x[3])].pop() # remove item from source
+            data[int(x[5])].append(y) # place item on destination
     return f'{data[1][-1]}{data[2][-1]}{data[3][-1]}{data[4][-1]}{data[5][-1]}{data[6][-1]}{data[7][-1]}{data[8][-1]}{data[9][-1]}'
 
 @timed
 def runB(directions, data):
+    '''Rearrange stacks of items according to directions'''
     for row in directions:
-        x = row.split(' ')
-        y = []
-        for _ in range(int(x[1])):
-            y.append(data[int(x[3])].pop())
-        for _ in range(int(x[1])):
-            data[int(x[5])].append(y.pop())
+        x = row.split(' ') # split direction into array
+        data[int(x[5])].extend(data[int(x[3])][-int(x[1]):]) # copy items from source and extend onto destination
+        data[int(x[3])] = data[int(x[3])][:-int(x[1])] # remove items from source
     return f'{data[1][-1]}{data[2][-1]}{data[3][-1]}{data[4][-1]}{data[5][-1]}{data[6][-1]}{data[7][-1]}{data[8][-1]}{data[9][-1]}'
 
 
 if __name__ == "__main__":
     data, i = fixdata(importData("05.in"))
-    print(f"A: {runA(data, i)}") #  ms
+    print(f"A: {runA(data, i)}") # 3.5 ms
     data, i = fixdata(importData("05.in"))
-    print(f"B: {runB(data, i)}") #  ms
+    print(f"B: {runB(data, i)}") # 1.5 ms
