@@ -54,4 +54,4 @@ class stacks:
 
 if __name__ == "__main__":
     stackA = stacks('05.in')
-    stackA.run() # A: 6.6 ms, B: 3.7 ms, T: 10.6 MS 
+    stackA.run() # A: 4.0 ms, B: 2.3 ms, T: 7.3 MS 
