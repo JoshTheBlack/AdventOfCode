@@ -17,7 +17,7 @@ class Puzzle:
         '''Find index of the last character of first instance of 4 distinct consecutive characters'''
         x = self.data[0]
         for i in range(len(self.data[0])):
-            y = set(f"{x[i]}{x[i+1]}{x[i+2]}{x[i+3]}")
+            y = set(f"{x[i:i+4]}")
             if len(y) == 4: break
         return i+4
 
@@ -26,7 +26,7 @@ class Puzzle:
         '''Find index of the last character of first instance of 14 distinct consecutive characters'''
         x = self.data[0]
         for i in range(len(self.data[0])):
-            y = set(f"{x[i]}{x[i+1]}{x[i+2]}{x[i+3]}{x[i+4]}{x[i+5]}{x[i+6]}{x[i+7]}{x[i+8]}{x[i+9]}{x[i+10]}{x[i+11]}{x[i+12]}{x[i+13]}")
+            y = set(f"{x[i:i+14]}")
             if len(y) == 14: break
         return i+14
 
