@@ -12,25 +12,17 @@ class Puzzle:
         return
 
     @timed
-    def runA(self):
-        '''Find index of the last character of first instance of 4 distinct consecutive characters'''
-        for i in range(len(self.data)):
-            y = set(f"{self.data[i:i+4]}")
-            if len(y) == 4: break
-        return i+4
-
-    @timed
-    def runB(self):
-        '''Find index of the last character of first instance of 14 distinct consecutive characters'''
-        for i in range(len(self.data)):
-            y = set(f"{self.data[i:i+14]}")
-            if len(y) == 14: break
-        return i+14
+    def test(self, length = 4):
+        '''Find index of the last character of first instance of a variable (length) distinct consecutive characters'''
+        for i in range(length, len(self.data)):
+            y = set(f"{self.data[i-length:i]}")
+            if len(y) == length: break
+        return i
 
     @timed
     def run(self):
-        print(self.runA())
-        print(self.runB())
+        print(f"Part one: {self.test()}")
+        print(f"Part two: {self.test(14)}")
 
 
 if __name__ == "__main__":
